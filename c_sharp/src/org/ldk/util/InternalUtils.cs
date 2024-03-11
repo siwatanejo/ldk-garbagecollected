@@ -78,7 +78,7 @@ internal class InternalUtils {
 
 
 	public static long encodeUint8Array(byte[] arr) {
-		long buf = bindings.allocate_buffer(arr.Length + 8);
+		long buf = Bindings.AllocateBuffer(arr.Length + 8);
 		unsafe { *((long*)buf) = (long)arr.Length; }
 		for (int i = 0; i < arr.Length; i++) {
 			unsafe {
@@ -88,7 +88,7 @@ internal class InternalUtils {
 		return buf;
 	}
 	public static long encodeUint16Array(short[] arr) {
-		long buf = bindings.allocate_buffer(arr.Length * 2 + 8);
+		long buf = Bindings.AllocateBuffer(arr.Length * 2 + 8);
 		unsafe { *((long*)buf) = (long)arr.Length; }
 		for (int i = 0; i < arr.Length; i++) {
 			unsafe {
@@ -98,7 +98,7 @@ internal class InternalUtils {
 		return buf;
 	}
 	public static long encodeUint32Array(int[] arr) {
-		long buf = bindings.allocate_buffer(arr.Length * 4 + 8);
+		long buf = Bindings.AllocateBuffer(arr.Length * 4 + 8);
 		unsafe { *((long*)buf) = (long)arr.Length; }
 		for (int i = 0; i < arr.Length; i++) {
 			unsafe {
@@ -108,7 +108,7 @@ internal class InternalUtils {
 		return buf;
 	}
 	public static long encodeUint64Array(long[] arr) {
-		long buf = bindings.allocate_buffer(arr.Length * 8 + 8);
+		long buf = Bindings.AllocateBuffer(arr.Length * 8 + 8);
 		unsafe { *((long*)buf) = (long)arr.Length; }
 		for (int i = 0; i < arr.Length; i++) {
 			unsafe {
@@ -124,7 +124,7 @@ internal class InternalUtils {
 		byte[] res = new byte[len];
 		for (int i = 0; i < len; i++)
 			res[i] = getU8ArrayElem(arrptr, i);
-		bindings.free_buffer(arrptr);
+		Bindings.FreeBuffer(arrptr);
 		return res;
 	}
 	public static short[] decodeUint16Array(long arrptr) {
@@ -132,7 +132,7 @@ internal class InternalUtils {
 		short[] res = new short[len];
 		for (int i = 0; i < len; i++)
 			res[i] = getU16ArrayElem(arrptr, i);
-		bindings.free_buffer(arrptr);
+		Bindings.FreeBuffer(arrptr);
 		return res;
 	}
 	public static long[] decodeUint64Array(long arrptr) {
@@ -140,7 +140,7 @@ internal class InternalUtils {
 		long[] res = new long[len];
 		for (int i = 0; i < len; i++)
 			res[i] = getU64ArrayElem(arrptr, i);
-		bindings.free_buffer(arrptr);
+		Bindings.FreeBuffer(arrptr);
 		return res;
 	}
 }
